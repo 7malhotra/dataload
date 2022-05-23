@@ -13,7 +13,7 @@ function App() {
 
   const uploadRequest = () => {
     axios
-      .post('127.0.0.1:8000/file/upload/', {
+      .post('http://127.0.0.1:8000/file/upload/', {
         file: file,
         json_data: jsonData,
       })
