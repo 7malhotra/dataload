@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
         <p>Data load</p>
       </header>
       <div>
