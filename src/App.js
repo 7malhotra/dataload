@@ -9,14 +9,14 @@ const allowedExtensions = ['csv'];
 function App() {
   // It will store the file uploaded by the user
   const [file, setFile] = useState(null);
-  const [jsonData, setJsonData] = useState({});
+  const [jsonData, setJsonData] = useState('to the new');
   const [success, setSuccess] = useState('to max');
 
   const uploadRequest = () => {
     console.log(file);
     var formData = new FormData();
     formData.append('file', file);
-    formData.append('json_data', jsonData);
+    formData.append('json_data', JSON.stringify(data));
     axios
       .post('http://127.0.0.1:8000/file/upload/', formData, {
         headers: {
@@ -75,7 +75,11 @@ function App() {
       const csv = Papa.parse(target.result, { header: true });
       const parsedData = csv?.data;
       const columns = Object.keys(parsedData[0]);
-      setData(columns);
+      let dataToBeSaved = {};
+      columns.forEach((col) => {
+        dataToBeSaved[`${col}`] = '';
+      });
+      setData(dataToBeSaved);
     };
     reader.readAsText(file);
   };
@@ -95,7 +99,27 @@ function App() {
         <button onClick={handleParse}>Parse</button>
       </div>
       <div style={{ marginTop: '3rem' }}>
-        {error ? error : data.map((col, idx) => <div key={idx}>{col}</div>)}
+        {error
+          ? error
+          : Object.keys(data).map((key, idx) => {
+              return (
+                <div key={idx}>
+                  <div>{key}</div>
+                  <select
+                    name={data[key]}
+                    id={data[key]}
+                    onChange={(e) =>
+                      setData({ ...data, [`${key}`]: e.target.value })
+                    }
+                  >
+                    <option value="">Not selected</option>
+                    <option value="target">Target</option>
+                    <option value="segmentation">Segmentation</option>
+                    <option value="explanatory">Explanatory</option>
+                  </select>
+                </div>
+              );
+            })}
       </div>
       <button onClick={uploadRequest}>Upload</button>
     </div>
