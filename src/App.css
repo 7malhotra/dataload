@@ -65,6 +65,11 @@
   font-size: 0.9rem;
   cursor: pointer;
 }
+.button_01 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .button_01 button {
   background-color: #008cba;
   border: none;
@@ -87,17 +92,23 @@
 }
 
 .item_01 {
-  margin: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.item_01 h4 {
+.item_01 div h4 {
   font-size: 0.9rem;
-  max-width: 200px;
-  min-width: 200px;
+  width: 100%;
 }
-.item_01 select {
+.item_01 div {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: #008cba solid 0.5px;
+  padding: 3px 7px;
+}
+.item_01 div select {
   margin: 10px;
   width: 150px;
   padding: 5px 35px 5px 5px;

@@ -13,7 +13,18 @@ function App() {
   const [success, setSuccess] = useState('');
 
   const uploadRequest = () => {
-    console.log(file);
+    let arePropertySelected = true;
+    Object.keys(data).forEach((col) => {
+      if (data[col] === '') {
+        arePropertySelected = false;
+        return;
+      }
+    });
+    if (!arePropertySelected) {
+      setSuccess('Please select the property for all the columns!');
+      return;
+    }
+
     var formData = new FormData();
     formData.append('file', file);
     formData.append('json_data', JSON.stringify(data));
@@ -114,19 +125,23 @@ function App() {
           : Object.keys(data).map((key, idx) => {
               return (
                 <div className="item_01" key={idx}>
-                  <h4>{key}</h4>
-                  <select
-                    name={data[key]}
-                    id={data[key]}
-                    onChange={(e) =>
-                      setData({ ...data, [`${key}`]: e.target.value })
-                    }
-                  >
-                    <option value="">Not selected</option>
-                    <option value="target">Target</option>
-                    <option value="segmentation">Segmentation</option>
-                    <option value="explanatory">Explanatory</option>
-                  </select>
+                  <div>
+                    <h4>{key}</h4>
+                  </div>
+                  <div>
+                    <select
+                      name={data[key]}
+                      id={data[key]}
+                      onChange={(e) =>
+                        setData({ ...data, [`${key}`]: e.target.value })
+                      }
+                    >
+                      <option value=""></option>
+                      <option value="target">Target</option>
+                      <option value="segmentation">Segmentation</option>
+                      <option value="explanatory">Explanatory</option>
+                    </select>
+                  </div>
                 </div>
               );
             })}
