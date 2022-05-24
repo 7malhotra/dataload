@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import './App.css';
 import Papa from 'papaparse';
+import './App.css';
 
 // Allowed extensions for input file
 const allowedExtensions = ['csv'];
@@ -9,8 +10,7 @@ const allowedExtensions = ['csv'];
 function App() {
   // It will store the file uploaded by the user
   const [file, setFile] = useState(null);
-  const [jsonData, setJsonData] = useState('to the new');
-  const [success, setSuccess] = useState('to max');
+  const [success, setSuccess] = useState('');
 
   const uploadRequest = () => {
     console.log(file);
@@ -33,7 +33,7 @@ function App() {
       });
   };
   // This state will store the parsed data
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
 
   // It state will contain the error when
   // correct file extension is not used
@@ -85,26 +85,36 @@ function App() {
   };
 
   return (
-    <div>
-      <label htmlFor="csvInput" style={{ display: 'block' }}>
-        Enter CSV File
-      </label>
-      <input
-        onChange={handleFileChange}
-        id="csvInput"
-        name="file"
-        type="File"
-      />
-      <div>
+    <div className="main_01">
+      <h1>Data Load</h1>
+      <div className="lable_01">
+        <label htmlFor="csvInput" style={{ display: 'block' }}>
+          Enter CSV File
+        </label>
+        <input
+          onChange={handleFileChange}
+          id="csvInput"
+          name="file"
+          type="File"
+        />
+      </div>
+      <div className="button_01">
         <button onClick={handleParse}>Parse</button>
       </div>
-      <div style={{ marginTop: '3rem' }}>
+      <div className="summary_01">
+        <h3>
+          {error
+            ? error
+            : Object.keys(data).length > 0
+            ? 'Summary of the input data'
+            : ''}
+        </h3>
         {error
           ? error
           : Object.keys(data).map((key, idx) => {
               return (
-                <div key={idx}>
-                  <div>{key}</div>
+                <div className="item_01" key={idx}>
+                  <h4>{key}</h4>
                   <select
                     name={data[key]}
                     id={data[key]}
@@ -121,7 +131,10 @@ function App() {
               );
             })}
       </div>
-      <button onClick={uploadRequest}>Upload</button>
+      <div className="button_01">
+        <button onClick={uploadRequest}>Upload</button>
+        <h4>{success}</h4>
+      </div>
     </div>
   );
 }

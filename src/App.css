@@ -36,3 +36,82 @@
     transform: rotate(360deg);
   }
 }
+
+.main_01 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.lable_01 {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 2px 2px 2px 2px #888888;
+  padding: 5px 10px;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin: 15px 0px;
+}
+
+.lable_01 input {
+  background-color: white;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+
+.lable_01 label {
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.button_01 button {
+  background-color: #008cba;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.summary_01 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f1fcff;
+  width: 100%;
+}
+
+.item_01 {
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.item_01 h4 {
+  font-size: 0.9rem;
+  max-width: 200px;
+  min-width: 200px;
+}
+.item_01 select {
+  margin: 10px;
+  width: 150px;
+  padding: 5px 35px 5px 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  height: 34px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: 96% / 15% #eee;
+}
+
+/* CAUTION: Internet Explorer hackery ahead */
+
+.item_01 select::-ms-expand {
+  display: none; /* Remove default arrow in Internet Explorer 10 and 11 */
+}
